@@ -2,7 +2,6 @@
   <div class="site-header__inner page-width">
     <a href="/" class="site-header__logo">{{ section.settings.blog_name | default: shop.name }}</a>
     <nav class="site-nav" id="site-nav">
-      <a href="/">Home</a>
       {% for link in linklists[section.settings.nav_menu].links %}
         <a href="{{ link.url }}"{% if link.active %} class="is-active"{% endif %}>{{ link.title }}</a>
       {% endfor %}
