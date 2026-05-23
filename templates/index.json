@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "featured": {
+      "type": "featured-article",
+      "settings": { "blog": "news", "label": "Featured Story" }
+    },
+    "grid": {
+      "type": "article-grid",
+      "settings": { "blog": "news", "heading": "Latest Stories", "view_all_label": "View all", "article_limit": 6, "skip_featured": true }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Stay in the loop",
+        "heading": "Stories delivered to you",
+        "body": "One thoughtful email a week. No noise. Unsubscribe anytime.",
+        "placeholder": "Your email address",
+        "button": "Subscribe",
+        "note": "No spam, ever."
+      }
+    }
+  },
+  "order": ["featured", "grid", "newsletter"]
+}

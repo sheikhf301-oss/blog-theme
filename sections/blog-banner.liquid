@@ -1,0 +1,21 @@
+<section class="blog-banner">
+  <div class="page-width">
+    <p class="blog-banner__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1 class="blog-banner__title">{{ section.settings.title }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="blog-banner__desc">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog Banner",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",     "default": "The Journal" },
+    { "type": "text",     "id": "title",       "label": "Heading",     "default": "Stories Worth Reading" },
+    { "type": "textarea","id": "description", "label": "Description", "default": "" }
+  ],
+  "presets": [{ "name": "Blog Banner" }]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtitle": "The page you're looking for doesn't exist.",
+      "back_home": "Back to Home"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read more",
+      "written_by": "By",
+      "min_read": "min read",
+      "filed_under": "Filed under",
+      "share": "Share this story",
+      "more_to_read": "More to Read"
+    },
+    "comments": {
+      "title": "Comments",
+      "no_comments": "No comments yet.",
+      "form_title": "Leave a comment",
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Share your thoughts…",
+      "post": "Post Comment",
+      "success": "Your comment has been submitted for review.",
+      "moderated": "Comments are moderated."
+    }
+  },
+  "newsletter": {
+    "subscribe": "Subscribe",
+    "success": "Thank you for subscribing!"
+  }
+}

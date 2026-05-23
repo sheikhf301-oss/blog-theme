@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "banner": {
+      "type": "blog-banner",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": { "articles_per_page": 9 }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Stay in the loop",
+        "heading": "Stories delivered to you",
+        "body": "One thoughtful email a week. No noise. Unsubscribe anytime.",
+        "placeholder": "Your email address",
+        "button": "Subscribe",
+        "note": "No spam, ever."
+      }
+    }
+  },
+  "order": ["banner", "main", "newsletter"]
+}

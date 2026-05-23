@@ -1,0 +1,51 @@
+{% assign blog = blogs[section.settings.blog] %}
+{% assign featured = blog.articles.first %}
+
+{% if featured %}
+<section class="featured-article">
+  <div class="page-width">
+    <div class="featured-article__inner">
+      <div class="featured-article__img-wrap">
+        {% if featured.image %}
+          <img
+            src="{{ featured.image | image_url: width: 1200 }}"
+            alt="{{ featured.image.alt | default: featured.title }}"
+            loading="eager"
+            class="featured-article__img"
+          >
+        {% else %}
+          <img src="https://picsum.photos/seed/{{ featured.id }}/1200/800" alt="{{ featured.title }}" loading="eager" class="featured-article__img">
+        {% endif %}
+      </div>
+      <div class="featured-article__body">
+        <p class="featured-article__label">{{ section.settings.label | default: 'Featured Story' }}</p>
+        {% if featured.tags.size > 0 %}
+          <a href="{{ blog.url }}/tagged/{{ featured.tags.first | handle }}" class="featured-article__tag">{{ featured.tags.first }}</a>
+        {% endif %}
+        <h2 class="featured-article__title">
+          <a href="{{ featured.url }}">{{ featured.title }}</a>
+        </h2>
+        <p class="featured-article__excerpt">{{ featured.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+        <div class="featured-article__meta">
+          <span>{{ featured.author }}</span>
+          <span class="meta-dot">·</span>
+          <span>{{ featured.published_at | date: '%b %d, %Y' }}</span>
+          <span class="meta-dot">·</span>
+          <span>{{ featured.content | strip_html | split: ' ' | size | divided_by: 200 | plus: 1 }} min read</span>
+        </div>
+        <a href="{{ featured.url }}" class="featured-article__read-link">Read the story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Featured Article",
+  "settings": [
+    { "type": "blog",   "id": "blog",  "label": "Blog",          "default": "news" },
+    { "type": "text",   "id": "label", "label": "Section label", "default": "Featured Story" }
+  ]
+}
+{% endschema %}

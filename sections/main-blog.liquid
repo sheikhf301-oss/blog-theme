@@ -1,0 +1,17 @@
+<section class="main-blog page-width">
+  {% if current_tags %}
+    <div class="blog-filter-bar">
+      <p>Showing: <strong>{{ current_tags | join: ', ' }}</strong> — <a href="{{ blog.url }}">Clear filter</a></p>
+    </div>
+  {% endif %}
+
+  <div class="article-grid">
+    {% for article in blog.articles %}
+      {% render 'article-card', article: article, blog: blog %}
+    {% else %}
+      <p class="article-grid__empty">No articles yet.</p>
+    {% endfor %}
+  </div>
+
+  {% render 'pagination', paginate: paginate %}
+</section>
