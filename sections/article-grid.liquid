@@ -1,5 +1,4 @@
 {% assign blog = blogs[section.settings.blog] %}
-{% assign skip_first = section.settings.skip_featured %}
 
 <section class="article-grid-section">
   <div class="page-width">
@@ -11,11 +10,8 @@
         {% endif %}
       </div>
     {% endif %}
-
     <div class="article-grid">
-      {% assign start = skip_first | default: false %}
-      {% assign count = 0 %}
-      {% for article in blog.articles limit: section.settings.article_limit offset: skip_first %}
+      {% for article in blog.articles limit: section.settings.article_limit %}
         {% render 'article-card', article: article, blog: blog %}
       {% else %}
         <p class="article-grid__empty">No articles yet. Check back soon.</p>
@@ -28,13 +24,11 @@
 {
   "name": "Article Grid",
   "settings": [
-    { "type": "blog",     "id": "blog",          "label": "Blog",                    "default": "news" },
-    { "type": "text",     "id": "heading",        "label": "Section heading",         "default": "Latest Stories" },
-    { "type": "text",     "id": "view_all_label", "label": "View all link text",      "default": "View all" },
-    { "type": "range",    "id": "article_limit",  "label": "Number of articles",      "min": 3, "max": 12, "step": 3, "default": 6 },
-    { "type": "checkbox", "id": "skip_featured",  "label": "Skip first (already featured above)", "default": true }
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "Latest Stories" },
+    { "type": "text", "id": "view_all_label", "label": "View all link text", "default": "View all" },
+    { "type": "range", "id": "article_limit", "label": "Number of articles", "min": 3, "max": 12, "step": 3, "default": 6 }
   ],
   "presets": [{ "name": "Article Grid" }]
 }
 {% endschema %}
-
