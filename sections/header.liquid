@@ -1,26 +1,38 @@
 <header class="site-header">
-  <div class="site-header__inner page-width">
-    <a href="/" class="site-header__logo">{{ section.settings.blog_name | default: shop.name }}</a>
-    <nav class="site-nav" id="site-nav">
-      {% for link in linklists[section.settings.nav_menu].links %}
-        <a href="{{ link.url }}"{% if link.active %} class="is-active"{% endif %}>{{ link.title }}</a>
-      {% endfor %}
-    </nav>
-    <div class="site-header__actions">
-      <a href="/blogs/news" class="site-header__cta">Read the Journal</a>
-      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
-      </button>
+
+  <!-- Top bar: logo + action buttons -->
+  <div class="site-header__top">
+    <div class="page-width site-header__top-inner">
+      <a href="/" class="site-header__logo">{{ section.settings.blog_name | default: shop.name }}</a>
+      <div class="site-header__actions">
+        <a href="/blogs/news" class="site-header__btn site-header__btn--outline">Read the Journal</a>
+        <a href="/collections/all" class="site-header__btn site-header__btn--solid">Shop Now</a>
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- Bottom bar: navigation -->
+  <div class="site-header__nav-bar">
+    <div class="page-width">
+      <nav class="site-nav" id="site-nav">
+        {% for link in linklists[section.settings.nav_menu].links %}
+          <a href="{{ link.url }}" class="site-nav__link{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </div>
+
 </header>
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
-    { "type": "text",     "id": "blog_name",  "label": "Blog name",        "default": "The Journal" },
-    { "type": "link_list","id": "nav_menu",   "label": "Navigation menu",  "default": "main-menu" }
+    { "type": "text",      "id": "blog_name", "label": "Blog name",       "default": "The Journal" },
+    { "type": "link_list", "id": "nav_menu",  "label": "Navigation menu", "default": "main-menu" }
   ]
 }
 {% endschema %}

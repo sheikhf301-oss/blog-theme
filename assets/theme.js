@@ -2,11 +2,11 @@
   'use strict';
 
   // Mobile nav toggle
-  var navToggle = document.getElementById('nav-toggle');
-  var navMenu = document.getElementById('nav-menu');
-  if (navToggle && navMenu) {
+  var navToggle = document.querySelector('.nav-toggle');
+  var navBar = document.querySelector('.site-header__nav-bar');
+  if (navToggle && navBar) {
     navToggle.addEventListener('click', function () {
-      var open = navMenu.classList.toggle('nav--open');
+      var open = navBar.classList.toggle('nav--open');
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
