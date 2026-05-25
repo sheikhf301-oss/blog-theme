@@ -2,11 +2,11 @@
   "sections": {
     "featured": {
       "type": "featured-article",
-      "settings": { "blog": "news-1", "label": "Featured Story" }
+      "settings": { "blog": "news", "label": "Featured Story" }
     },
     "grid": {
       "type": "article-grid",
-      "settings": { "blog": "news-1", "heading": "Latest Stories", "view_all_label": "View all", "article_limit": 6, "skip_featured": true }
+      "settings": { "blog": "news", "heading": "Latest Stories", "view_all_label": "View all", "article_limit": 6, "skip_featured": true }
     },
     "newsletter": {
       "type": "newsletter",
