@@ -1,20 +1,51 @@
 {% assign blog = blogs[section.settings.blog] %}
 
-<section class="article-grid-section">
+<section class="latest-stories">
   <div class="page-width">
-    {% if section.settings.heading != blank %}
-      <div class="section-heading">
-        <h2>{{ section.settings.heading }}</h2>
-        {% if section.settings.view_all_label != blank %}
-          <a href="{{ blog.url }}" class="section-heading__link">{{ section.settings.view_all_label }} →</a>
-        {% endif %}
+    <div class="latest-stories__header">
+      <div>
+        <span class="latest-stories__eyebrow">From the Blog</span>
+        <h2 class="latest-stories__heading">{{ section.settings.heading | default: 'Latest Stories' }}</h2>
       </div>
-    {% endif %}
-    <div class="article-grid">
-      {% for article in blog.articles limit: section.settings.article_limit %}
-        {% render 'article-card', article: article, blog: blog %}
+      {% if section.settings.view_all_label != blank and blog %}
+        <a href="{{ blog.url }}" class="latest-stories__view-all">{{ section.settings.view_all_label }} →</a>
+      {% endif %}
+    </div>
+
+    <div class="stories-grid">
+      {% assign skip = section.settings.skip_featured %}
+      {% assign count = 0 %}
+      {% for article in blog.articles limit: 20 %}
+        {% if skip and forloop.first %}{% continue %}{% endif %}
+        {% assign count = count | plus: 1 %}
+        {% if count > section.settings.article_limit %}{% break %}{% endif %}
+        <article class="story-card">
+          <a href="{{ article.url }}" class="story-card__img-link">
+            <div class="story-card__img-wrap">
+              {% if article.image %}
+                <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | default: article.title }}" loading="lazy" class="story-card__img">
+              {% else %}
+                <img src="https://picsum.photos/seed/{{ article.id }}/800/500" alt="{{ article.title }}" loading="lazy" class="story-card__img">
+              {% endif %}
+            </div>
+          </a>
+          <div class="story-card__body">
+            {% if article.tags.size > 0 %}
+              <a href="{{ blog.url }}/tagged/{{ article.tags.first | handle }}" class="story-card__tag">{{ article.tags.first }}</a>
+            {% endif %}
+            <h3 class="story-card__title">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h3>
+            <p class="story-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+            <div class="story-card__meta">
+              <span>{{ article.author }}</span>
+              <span class="meta-dot">·</span>
+              <span>{{ article.published_at | date: '%b %d, %Y' }}</span>
+            </div>
+          </div>
+        </article>
       {% else %}
-        <p class="article-grid__empty">No articles yet. Check back soon.</p>
+        <p class="latest-stories__empty">No articles yet. Check back soon.</p>
       {% endfor %}
     </div>
   </div>
@@ -24,10 +55,11 @@
 {
   "name": "Article Grid",
   "settings": [
-    { "type": "blog", "id": "blog", "label": "Blog" },
-    { "type": "text", "id": "heading", "label": "Section heading", "default": "Latest Stories" },
-    { "type": "text", "id": "view_all_label", "label": "View all link text", "default": "View all" },
-    { "type": "range", "id": "article_limit", "label": "Number of articles", "min": 3, "max": 12, "step": 3, "default": 6 }
+    { "type": "blog",     "id": "blog",          "label": "Blog" },
+    { "type": "text",     "id": "heading",        "label": "Section heading",    "default": "Latest Stories" },
+    { "type": "text",     "id": "view_all_label", "label": "View all text",      "default": "View all" },
+    { "type": "range",    "id": "article_limit",  "label": "Number of articles", "min": 3, "max": 12, "step": 3, "default": 6 },
+    { "type": "checkbox", "id": "skip_featured",  "label": "Skip first article (already shown above)", "default": true }
   ],
   "presets": [{ "name": "Article Grid" }]
 }
